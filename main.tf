@@ -1,1 +1,3 @@
-module
+module "vpc" {
+  source = "./vpc"
+}
