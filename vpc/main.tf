@@ -1,5 +1,5 @@
 
-# Create an AWS VPC
+# Create an AWS VPC with subnets and route table
 resource "aws_vpc" "my-vpc" {
   cidr_block       = var.vpc-cidr-block
 
@@ -82,14 +82,14 @@ resource "aws_nat_gateway" "my-nat-gateway" {
     Name = "My-Nat-Gateway"
   }
 
-  depends_on = [aws_internet_gateway.my-internet-gateway] # Make sure the internet gateway is created before creating the NAT gateway
+  depends_on = [aws_internet_gateway.my-internet-gateway] 
 }
 
 
 resource "aws_route_table" "my-public-rt" {
   vpc_id = aws_vpc.my-vpc.id
 
-  # Create a default route for the internet gateway with destination 0.0.0.0/0
+  
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.my-internet-gateway.id
