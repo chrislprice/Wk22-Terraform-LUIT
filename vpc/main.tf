@@ -1,8 +1,3 @@
-#Set AWS Provider
-#Uses the aws_region variable to set the region parameter
-provider "aws" {
-  region = var.region 
-}
 
 # Create an AWS VPC
 resource "aws_vpc" "my-vpc" {
@@ -14,7 +9,7 @@ resource "aws_vpc" "my-vpc" {
   }
 }    
 
-# Create first public subnet in the VPC
+
 resource "aws_subnet" "public-subnet1" {
   vpc_id                  = aws_vpc.my-vpc.id
   cidr_block              = var.public-subnet1-cidr
@@ -26,7 +21,7 @@ resource "aws_subnet" "public-subnet1" {
   }
 }
 
-# Create second public subnet in the VPC
+
 resource "aws_subnet" "public-subnet2" {
   vpc_id                  = aws_vpc.my-vpc.id
   cidr_block              = var.public-subnet2-cidr
@@ -38,7 +33,7 @@ resource "aws_subnet" "public-subnet2" {
   }
 }
 
-# Create first private subnet in the VPC
+
 resource "aws_subnet" "private-subnet1" {
   vpc_id                  = aws_vpc.my-vpc.id
   cidr_block              = var.private-subnet1-cidr
@@ -50,7 +45,7 @@ resource "aws_subnet" "private-subnet1" {
   }
 }
 
-# Create second private subnet in the VPC
+
 resource "aws_subnet" "private-subnet2" {
   vpc_id                  = aws_vpc.my-vpc.id
   cidr_block              = var.private-subnet2-cidr
@@ -63,7 +58,7 @@ resource "aws_subnet" "private-subnet2" {
 }
 
 
-# Create an internet gateway and associate it with the VPC
+
 resource "aws_internet_gateway" "my-internet-gateway" {
   vpc_id = aws_vpc.my-vpc.id
 
@@ -72,13 +67,13 @@ resource "aws_internet_gateway" "my-internet-gateway" {
   }
 }
 
-# Create an Elastic IP address
+
 resource "aws_eip" "nat-gateway-eip" {
     depends_on                = [aws_internet_gateway.my-internet-gateway]
     
 }
 
-# Create a NAT gateway and associate it with an Elastic IP and a public subnet
+
 resource "aws_nat_gateway" "my-nat-gateway" {
   allocation_id = aws_eip.nat-gateway-eip.id    
   subnet_id     = aws_subnet.public-subnet1.id
@@ -105,7 +100,7 @@ resource "aws_route_table" "my-public-rt" {
   }
 }
 
-# Creates a private route table with a default route to the NAT gateway
+
 resource "aws_route_table" "my-private-rt" {
   vpc_id = aws_vpc.my-vpc.id
 
@@ -119,25 +114,25 @@ resource "aws_route_table" "my-private-rt" {
   }
 }
 
-# Associates the public route table with the public subnet 1
+
 resource "aws_route_table_association" "my-public-subnet1-rt-associate" {
   subnet_id      = aws_subnet.public-subnet1.id
   route_table_id = aws_route_table.my-public-rt.id
 }
 
-# Associates the public route table with the public subnet 2
+
 resource "aws_route_table_association" "my-public-subnet2-rt-associate" {
   subnet_id      = aws_subnet.public-subnet2.id
   route_table_id = aws_route_table.my-public-rt.id
 }
 
-# Associates the private route table with the private subnet 1
+
 resource "aws_route_table_association" "my-private-subnet1-rt-associate" {
   subnet_id      = aws_subnet.private-subnet1.id
   route_table_id = aws_route_table.my-private-rt.id
 }
 
-# Associates the private route table with the private subnet 2
+
 resource "aws_route_table_association" "y-private-subnet2-rt-associate" {
   subnet_id      = aws_subnet.private-subnet2.id
   route_table_id = aws_route_table.my-private-rt.id
