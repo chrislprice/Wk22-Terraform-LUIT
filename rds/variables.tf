@@ -6,9 +6,6 @@ variable "database_subnet_name" {
 variable "private_subnet_ids" {
   type = list(string)
 }
-#variable "private_subnet1_id" {}
-#variable "private_subnet2_id" {}
-
 
 variable "allocated_storage" {
   type    = number
@@ -25,7 +22,10 @@ variable "instance_class" {
   default = "db.t3.micro"
 
 }
-#variable "vpc_security_group_ids" {}
+variable "vpc_security_group_ids" {
+  type = list(string)
+}
+
 variable "db_name" {
   type    = string
   default = "TestDB"

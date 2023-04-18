@@ -14,12 +14,12 @@ module "auto_scale" {
 }
 
 module "rds" {
-  source             = "./rds"
-  private_subnet_ids = [module.vpc.private-subnet1, module.vpc.private-subnet2]
-  allocated_storage  = 30
-  engine             = "MySQL"
-  instance_class     = "db.t3.micro"
-  # vpc_security_group_ids      = [var.vpc_security_group_ids]
+  source                      = "./rds"
+  private_subnet_ids          = [module.vpc.private-subnet1, module.vpc.private-subnet2]
+  allocated_storage           = 30
+  engine                      = "MySQL"
+  instance_class              = "db.t3.micro"
+  vpc_security_group_ids      = [module.sg_group.rds-sgid]
   db_name                     = "TestDB"
   allow_major_version_upgrade = "true"
   auto_minor_version_upgrade  = "true"
