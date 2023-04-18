@@ -26,7 +26,7 @@ variable "asg_group_name" {
 
 variable "asg_min_value" {
   type    = number
-  default = 2
+  default = 3
 }
 
 variable "asg_max_value" {
