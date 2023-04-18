@@ -1,11 +1,10 @@
-# Database subnet group
+#Creates database subnet group
 resource "aws_db_subnet_group" "database_subnet_name" {
   name       = var.database_subnet_name
   subnet_ids = var.private_subnet_ids
 }
 
 
-# Database instance in Private Subnet 1
 resource "aws_db_instance" "db_instance" {
   allocated_storage           = var.allocated_storage
   engine                      = var.engine
