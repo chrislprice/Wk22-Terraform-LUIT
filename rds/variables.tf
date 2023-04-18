@@ -1,3 +1,4 @@
+#variables
 variable "database_subnet_name" {
   default = "mysql-database-subnet"
   type    = string
