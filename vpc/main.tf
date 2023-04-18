@@ -9,7 +9,6 @@ resource "aws_vpc" "my-vpc" {
   }
 }
 
-
 resource "aws_subnet" "public-subnet1" {
   vpc_id                  = aws_vpc.my-vpc.id
   cidr_block              = var.public-subnet1-cidr
@@ -58,7 +57,6 @@ resource "aws_subnet" "private-subnet2" {
 }
 
 
-
 resource "aws_internet_gateway" "my-internet-gateway" {
   vpc_id = aws_vpc.my-vpc.id
 
@@ -70,7 +68,6 @@ resource "aws_internet_gateway" "my-internet-gateway" {
 
 resource "aws_eip" "nat-gateway-eip" {
   depends_on = [aws_internet_gateway.my-internet-gateway]
-
 }
 
 

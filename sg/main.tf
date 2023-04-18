@@ -1,5 +1,3 @@
-
-
 resource "aws_security_group" "apache-terra-sg" {
   name   = "apache-terra-sg"
   vpc_id = var.vpc_id
