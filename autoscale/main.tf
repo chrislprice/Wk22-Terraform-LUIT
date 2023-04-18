@@ -4,7 +4,7 @@ resource "aws_launch_template" "asg_apache_terra_template" {
   instance_type          = var.instance_type
   key_name               = var.key_pair_name
   vpc_security_group_ids = var.security_group
-  user_data = filebase64("${path.module}/apache-installation-script.sh")
+  user_data              = filebase64("${path.module}/apache-installation-script.sh")
 }
 
 resource "aws_autoscaling_group" "asg_apache_terra_group" {
