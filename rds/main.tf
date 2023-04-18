@@ -18,4 +18,6 @@ resource "aws_db_instance" "db_instance" {
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
   multi_az                    = "true"
   skip_final_snapshot         = "true"
+  depends_on = [aws_db_subnet_group.database_subnet_name]#waits until subnet is completed
+  #if not, causes error duing deployment
 }
