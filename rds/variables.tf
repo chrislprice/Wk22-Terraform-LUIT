@@ -33,11 +33,11 @@ variable "db_name" {
 }
 variable "username" {
   type    = string
-  default = "noximure"
+  default = "enter username"
 }
 variable "password" {
   type    = string
-  default = "tarheels123"
+  default = "enter a password"
 }
 
 variable "allow_major_version_upgrade" {
